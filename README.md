@@ -5,6 +5,10 @@ Introduction
 ------------
 This class allows you easily create UNIX-daemons.
 
+Install
+-------
+`localhost:~$ pip install -e git+https://github.com/shamanis/python-daemon#egg=python-daemon`
+
 Start-up and use
 ----------------
 All you need to do - extend Daemon class and override method run().
@@ -52,3 +56,4 @@ This method must be implemented.
 handle(self, argv=sys.argv)
 ---------------------------
 This method handles the command line arguments - sys.argv
+
