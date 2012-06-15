@@ -11,7 +11,7 @@ setup(
     author_email='public@shamanis.com',
     description=('Class for create UNIX-daemons'),
     license='BSD',
-    keywords='unix, daemon'
+    keywords='unix, daemon',
     url='https://github.com/shamanis/python-daemon',
     long_description=read('README.md'),
     classifiers=[
