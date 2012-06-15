@@ -31,7 +31,7 @@ As an example of a file `run.py`
 
 * To restart: `localhost:~$ python run.py restart`
 
-__init__(self, pidfile, chroot=None, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null')
+\__init\__(self, pidfile, chroot=None, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null')
 ----------
 Class constructor expects only one parameter - a `pidfile`.
 
