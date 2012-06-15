@@ -27,8 +27,6 @@ For example:
         daemon = MyDaemon('/tmp/test.pid')
         daemon.handle()
 
-As an example of a file `run.py`
-
 * To start: `localhost:~$ python run.py start`
 
 * To stop: `localhost:~$ python run.py stop`
