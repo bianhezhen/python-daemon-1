@@ -33,7 +33,7 @@ For example:
 
 * To restart: `localhost:~$ python run.py restart`
 
-\_\_init\_\_(self, pidfile, chroot=None, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null')
+\_\_init\_\_(self, pidfile, chroot=None, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null', log_level='ERROR')
 ----------
 Class constructor expects only one parameter - a `pidfile`.
 
@@ -46,6 +46,8 @@ Class constructor expects only one parameter - a `pidfile`.
 `stdout` - Standart stream output. Default `/dev/null`
 
 `stderr` - Standart stream output for errors. Default `/dev/null`
+
+`log_level` - Log level. Default `ERROR`. Possible values `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`.
 
 run(self)
 ---------
