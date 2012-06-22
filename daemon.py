@@ -3,7 +3,7 @@
 
 import sys, os, atexit, datetime
 from signal import SIGTERM, SIG_DFL
-import logging
+import logging as log
 
 class Daemon:
     """
@@ -11,17 +11,17 @@ class Daemon:
     Использование: Наследоваться от класса и реализовать метод run()
     """
     def __init__(self, pidfile, chroot=None, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null', log_level='ERROR'):
-        LOG_LEVEL = {'DEBUG': logging.DEBUG,
-                     'INFO': logging.INFO,
-                     'WARNING': logging.WARNING,
-                     'ERROR': logging.ERROR,
-                     'CRITICAL': logging.CRITICAL}
+        LOG_LEVEL = {'DEBUG': log.DEBUG,
+                     'INFO': log.INFO,
+                     'WARNING': log.WARNING,
+                     'ERROR': log.ERROR,
+                     'CRITICAL': log.CRITICAL}
         self.stdin = stdin
         self.stdout = stdout
         self.stderr = stderr
         self.pidfile = pidfile
         self.chroot = chroot
-        logging.basicConfig(filename='daemon.log', level=LOG_LEVEL[log_level],
+        log.basicConfig(filename='daemon.log', level=LOG_LEVEL[log_level],
             format='%(asctime)s [%(levelname)s] %(message)s')
 
     def get_pid(self):
@@ -67,7 +67,7 @@ class Daemon:
             try:
                 os.chroot(self.chroot)
             except Exception, e:
-                logging.critical('Chroot in %s error: %s' % (self.chroot, e.strerror))
+                log.critical('Chroot in %s error: %s' % (self.chroot, e.strerror))
 
         try:
             pid = os.fork()
@@ -88,16 +88,16 @@ class Daemon:
 
         atexit.register(self.post_stop)
         pid = str(os.getpid())
-        logging.info('Process PID: %s' % pid)
+        log.info('Process PID: %s' % pid)
         file(self.pidfile, 'w+').write("%s\n" % pid)
-        logging.debug('PID-file %s created' % self.pidfile)
+        log.debug('PID-file %s created' % self.pidfile)
 
     def post_stop(self):
         """
         Метод выполняется при нормальном завершении работы демона
         """
         os.remove(self.pidfile)
-        logging.debug('Delete PID-file')
+        log.debug('Delete PID-file')
 
     def start(self):
         """
@@ -107,9 +107,9 @@ class Daemon:
         if pid > 0:
             sys.stderr.write("Daemon already running on PID: %d\n" % pid)
         else:
-            logging.info('Starting...')
+            log.info('Starting...')
             self.demonize()
-            logging.debug('Start success')
+            log.debug('Start success')
             self.run()
 
     def stop(self):
@@ -119,7 +119,7 @@ class Daemon:
         pid = self.get_pid()
         if pid > 0:
             os.kill(pid, SIGTERM)
-            logging.info('Stop programm')
+            log.info('Stop programm')
             self.post_stop()
         else:
             sys.stderr.write("Daemon not running\n")
@@ -128,7 +128,7 @@ class Daemon:
         """
         Метод перезапускает демон
         """
-        logging.info('Restarting...')
+        log.info('Restarting...')
         self.stop()
         self.start()
 
